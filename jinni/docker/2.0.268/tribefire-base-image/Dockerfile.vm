@@ -11,7 +11,7 @@ RUN apt-get update &&\
     apt-get -y install curl
 
 ### JDK #######################################################################
-ARG JDK_ARCHIVE_URL=https://download.java.net/java/GA/jdk21.0.1/415e3f918a1f4062a0074a2794853d0d/12/GPL/openjdk-21.0.1_linux-x64_bin.tar.gz
+ARG JDK_ARCHIVE_URL=https://download.java.net/java/GA/jdk21.0.2/f2283984656d49d69e91c558476027ac/13/GPL/openjdk-21.0.2_linux-x64_bin.tar.gz
 ENV JDK_ARCHIVE_URL=${d}{JDK_ARCHIVE_URL}
 
 RUN echo Downloading JDK from ${d}{JDK_ARCHIVE_URL}. &&\
