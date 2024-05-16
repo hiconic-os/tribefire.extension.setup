@@ -12,7 +12,7 @@ on:
 
 jobs:
   run:
-    uses: hiconic-os/hiconic.ci.workflows/.github/workflows/range.yaml@main
+    uses: hiconic-os/hiconic.ci.workflows/.github/workflows/range.yaml@hc
     secrets: inherit
     with:
       range: "${{ inputs.range }}"
