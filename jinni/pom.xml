@@ -87,11 +87,6 @@ limitations under the License.
             <artifactId>slf4j-nop</artifactId>
             <version>1.6.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.braintribe.common</groupId>
-            <artifactId>btansi</artifactId>
-            <version>${V.com.braintribe.common}</version>
-        </dependency>
         <!-- =================== -->
         <!-- Extensions of Jinni -->
         <!-- =================== -->

@@ -24,14 +24,12 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.LogManager;
 
-import org.fusesource.jansi.internal.CLibrary;
-
-import com.braintribe.ansi.AnsiTools;
 import com.braintribe.console.ConsoleConfiguration;
 import com.braintribe.console.PlainSysoutConsole;
 import com.braintribe.console.PrintStreamConsole;
@@ -107,10 +105,18 @@ public class JinniConfigHelper {
 	}
 
 	public static void configureDefaultProtocolling() {
-		if (AnsiTools.isAnsiStdout())
+		if (isStdoutAnsi())
 			ConsoleConfiguration.install(new PrintStreamConsole(System.out));
 		else
 			ConsoleConfiguration.install(new PlainSysoutConsole());
+	}
+	
+	private static boolean isStdoutAnsi() {
+		return System.console() != null && System.console().isTerminal();
+	}
+	
+	private static boolean isStderrAnsi() {
+		return isStdoutAnsi();
 	}
 
 	public static boolean configureProtocolling(JinniOptions options) {
@@ -122,9 +128,9 @@ public class JinniConfigHelper {
 		if (protocolTo != null) {
 			switch (protocolTo) {
 				case OutputChannels.STDOUT:
-					return ensureCharsetAndInstallProtocolOutput(System.out, colored.test(AnsiTools.isAnsiStdout()), options);
+					return ensureCharsetAndInstallProtocolOutput(System.out, colored.test(isStdoutAnsi()), options);
 				case OutputChannels.STDERR:
-					return ensureCharsetAndInstallProtocolOutput(System.err, colored.test(AnsiTools.isAnsiStderr()), options);
+					return ensureCharsetAndInstallProtocolOutput(System.err, colored.test(isStderrAnsi()), options);
 				case OutputChannels.NONE:
 					ConsoleConfiguration.install(VoidConsole.INSTANCE);
 					return false;
@@ -150,15 +156,10 @@ public class JinniConfigHelper {
 				ps = new PrintStream(ps, false, options.getProtocolCharset());
 			} // For files and in MINGW_XTERM (e.g. Git Bash) we set UTF-8 by default; maybe also cygwin?
 			else if (ps == System.out) {
-				if (CLibrary.isatty(CLibrary.STDOUT_FILENO) == 0 || AnsiTools.IS_MINGW_XTERM) {
-					ps = new PrintStream(ps, false, "UTF-8");
+				if (System.console() == null) {
+					ps = new PrintStream(ps, false, StandardCharsets.UTF_8);
 				}
-			} else if (ps == System.err) {
-				if (CLibrary.isatty(CLibrary.STDERR_FILENO) == 0 || AnsiTools.IS_MINGW_XTERM) {
-					ps = new PrintStream(ps, false, "UTF-8");
-				}
-			}
-
+			} 
 			PrintStreamConsole console = new PrintStreamConsole(ps, ansiConsole);
 			ConsoleConfiguration.install(console);
 			
