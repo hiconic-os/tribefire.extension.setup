@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -36,25 +35,22 @@ public class ProcessExecution {
 			this.listener = listener;
 		}
 
-
 		@Override
 		public void run() {
 			try {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in, getConsoleEncoding()));
-				String line = null;				
+				String line = null;
 				while ((line = reader.readLine()) != null) {
 					if (listener != null) {
 						listener.acknowledgeProcessNotification(MessageType.info, line);
 					}
-					if (buffer.length() > 0) buffer.append('\n');
+					if (buffer.length() > 0)
+						buffer.append('\n');
 					buffer.append(line);
-					
+
 				}
-			}
-			catch (InterruptedIOException e) {
-			}
-			catch (IOException e) {
-				
+			} catch (IOException e) {
+				// ignored
 			}
 		}
 		
