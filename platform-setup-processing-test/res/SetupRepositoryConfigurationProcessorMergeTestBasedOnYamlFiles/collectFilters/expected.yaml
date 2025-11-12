@@ -1,3 +1,4 @@
+offline: false
 repositories:
   - !com.braintribe.devrock.model.repository.MavenHttpRepository
     artifactFilter: !com.braintribe.devrock.model.repository.filters.DisjunctionArtifactFilter
@@ -16,8 +17,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo"
+    offline: false
     password: "myPassword"
+    snapshotRepo: false
     updateable: true
     url: "myURL"
     user: "myUser"

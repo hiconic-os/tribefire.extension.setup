@@ -1,10 +1,14 @@
+offline: false
 repositories:
   - !com.braintribe.devrock.model.repository.MavenHttpRepository
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-a"
+    offline: false
     password: "password1-a"
+    snapshotRepo: false
     updateable: true
     url: "url1-a"
     user: "user1-a"
@@ -12,8 +16,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-ab"
+    offline: false
     password: "password2-ab"
+    snapshotRepo: false
     updateable: true
     url: "url2-ab"
     user: "user2-ab"
@@ -21,8 +28,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-ac"
+    offline: false
     password: "password3-ac"
+    snapshotRepo: false
     updateable: true
     url: "url3-ac"
     user: "user3-ac"
@@ -30,8 +40,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-abc"
+    offline: false
     password: "password3-abc"
+    snapshotRepo: false
     updateable: true
     url: "url3-abc"
     user: "user3-abc"
@@ -39,8 +52,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-b"
+    offline: false
     password: "password2-b"
+    snapshotRepo: false
     updateable: true
     url: "url2-b"
     user: "user2-b"
@@ -48,8 +64,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-bc"
+    offline: false
     password: "password3-bc"
+    snapshotRepo: false
     updateable: true
     url: "url3-bc"
     user: "user3-bc"
@@ -57,8 +76,11 @@ repositories:
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo-c"
+    offline: false
     password: "password3-c"
+    snapshotRepo: false
     updateable: true
     url: "url3-c"
     user: "user3-c"

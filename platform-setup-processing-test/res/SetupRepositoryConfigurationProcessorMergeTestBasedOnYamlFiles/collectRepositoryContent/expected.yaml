@@ -1,10 +1,14 @@
+offline: false
 repositories:
   - !com.braintribe.devrock.model.repository.MavenHttpRepository
     cachable: true
     changesIndexType: incremental
     checkSumPolicy: fail
+    isWeaklyCertified: false
     name: "repo"
+    offline: false
     password: "password2"
+    snapshotRepo: false
     updateable: true
     url: "url4"
     user: "user1"
