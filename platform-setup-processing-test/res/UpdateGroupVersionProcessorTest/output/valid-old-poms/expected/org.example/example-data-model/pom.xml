@@ -19,7 +19,7 @@
 		<major>3</major>
 		<minor>2</minor>
 		<nextMinor>3</nextMinor>
-		<revision>1-pc</revision>
+		<revision>1</revision>
 		<archetype>model</archetype>
 	</properties>
 	<dependencies>

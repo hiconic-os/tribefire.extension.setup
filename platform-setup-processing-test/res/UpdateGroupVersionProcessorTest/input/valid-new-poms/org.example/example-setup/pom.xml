@@ -13,7 +13,7 @@
 		<version>[2.1,2.2)</version>
 	</parent>
 	<artifactId>example-data-model</artifactId>
-	<version>2.1.666-pc</version>
+	<version>2.1.666</version>
 	<properties>
 		<archetype>asset</archetype>
 	</properties>

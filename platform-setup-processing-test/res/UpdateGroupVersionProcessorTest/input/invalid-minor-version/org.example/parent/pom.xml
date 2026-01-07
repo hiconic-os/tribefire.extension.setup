@@ -15,7 +15,7 @@
 		<major>2</major>
 		<minor>--invalid minor version--</minor>
 		<nextMinor>2</nextMinor>
-		<revision>123-pc</revision>
+		<revision>123</revision>
 		<java.version>1.8</java.version>
 		<V.com.braintribe.gm>[1.0,1.1)</V.com.braintribe.gm>
 		<V.org.example>[${major}.${minor},${major}.${nextMinor})</V.org.example>

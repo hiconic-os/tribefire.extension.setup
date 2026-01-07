@@ -18,7 +18,7 @@
 		<major>2</major>
 		<minor>1</minor>
 		<nextMinor>2</nextMinor>
-		<revision>666-pc</revision>
+		<revision>666</revision>
 		<archetype>asset</archetype>
 	</properties>
 	<dependencies>

@@ -15,7 +15,7 @@
 		<major>3</major>
 		<minor>2</minor>
 		<nextMinor>3</nextMinor>
-		<revision>1-pc</revision>
+		<revision>1</revision>
 		<java.version>1.8</java.version>
 		<V.com.braintribe.gm>[1.0,1.1)</V.com.braintribe.gm>
 		<V.org.example>[${major}.${minor},${major}.${nextMinor})</V.org.example>

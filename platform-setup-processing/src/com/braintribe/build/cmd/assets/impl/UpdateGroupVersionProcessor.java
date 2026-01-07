@@ -154,7 +154,7 @@ public class UpdateGroupVersionProcessor {
 			try {
 				pom = parsePom(artifactPomFile, currentVersion);
 
-				String initialRevision = "1-pc";
+				String initialRevision = "1";
 				if (pom.usesVersionProperties) {
 					DOMTools.getExistingElementByXPath(pom.element, "/project/properties/major").setTextContent(String.valueOf(newVersion.major));
 					DOMTools.getExistingElementByXPath(pom.element, "/project/properties/minor").setTextContent(String.valueOf(newVersion.minor));
@@ -212,20 +212,19 @@ public class UpdateGroupVersionProcessor {
 	 * @param pomFile
 	 *            the pom to parse.
 	 * @param parentPomVersion
-	 *            an (optional) {@link MajorMinorVersion} read from the parent POM. If set, the version in the parsed POM
-	 *            must match this version.
+	 *            an (optional) {@link MajorMinorVersion} read from the parent POM. If set, the version in the parsed POM must match this version.
 	 * @return the <code>Pom</code> representation of the specified <code>pomFile</code>.
 	 */
 	static Pom parsePom(File pomFile, MajorMinorVersion parentPomVersion) {
 		Pom pom = new Pom(pomFile);
 
-		pom.artifactId = DOMTools.getExistingElementByXPath(pom.element, "/project/artifactId").getTextContent();
-		pom.isParent = pom.artifactId.equals("parent");
+		try {
+			pom.artifactId = DOMTools.getExistingElementByXPath(pom.element, "/project/artifactId").getTextContent();
+			pom.isParent = pom.artifactId.equals("parent");
 
- 		try {
 			pom.versionString = getVersionString(pom.element);
 			pom.usesVersionProperties = pom.versionString.contains("$");
-			
+
 			if (pom.usesVersionProperties) {
 				// old POM with version properties -> read major/minor from properties
 				pom.major = getIntegerProperty(pom.element, "major");
@@ -241,7 +240,7 @@ public class UpdateGroupVersionProcessor {
 				pom.major = Integer.parseInt(StringTools.getSubstringBefore(pom.versionString, "."));
 				pom.minor = Integer.parseInt(StringTools.getSubstringBetween(pom.versionString, ".", "."));
 			}
-			
+
 			if (parentPomVersion != null) {
 				if (pom.major != parentPomVersion.major) {
 					throw new IllegalStateException(
@@ -254,22 +253,18 @@ public class UpdateGroupVersionProcessor {
 			}
 
 			pom.hasParent = DOMTools.getElementByXPath(pom.element, "/project/parent") != null;
-			String normalizedPath = FileTools.normalizePath(pom.path);
 
-			if (!pom.hasParent && !pom.isParent && !normalizedPath.endsWith("-view/pom.xml")) {
-				throw new IllegalStateException("File " + pomFile.getPath() + " has no 'parent' section although its not the parent and also not a view artifact!");
-			}
-			if (pom.isParent && pom.hasParent) {
+			if (pom.isParent && pom.hasParent)
 				throw new IllegalStateException("File " + pomFile.getPath() + " has a 'parent' section although it's the parent artifact's POM!");
-			}
 
 			String groupIdXPath = pom.hasParent ? "/project/parent/groupId" : "/project/groupId";
 			pom.groupId = DOMTools.getExistingElementByXPath(pom.element, groupIdXPath).getTextContent();
 
+			return pom;
+
 		} catch (RuntimeException e) {
 			throw new IllegalStateException("Error while processing " + pomFile.getPath() + ": " + e.getMessage(), e);
 		}
-		return pom;
 	}
 
 	/**
