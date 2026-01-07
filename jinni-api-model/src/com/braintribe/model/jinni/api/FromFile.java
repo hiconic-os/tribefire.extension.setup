@@ -17,6 +17,7 @@ package com.braintribe.model.jinni.api;
 
 import com.braintribe.model.generic.annotation.meta.Alias;
 import com.braintribe.model.generic.annotation.meta.Description;
+import com.braintribe.model.generic.annotation.meta.FileName;
 import com.braintribe.model.generic.annotation.meta.Mandatory;
 import com.braintribe.model.generic.annotation.meta.PositionalArguments;
 import com.braintribe.model.generic.reflection.EntityType;
@@ -33,9 +34,10 @@ public interface FromFile extends From {
 	@Description("The file from which the content should be read")
 	@Alias("f")
 	@Mandatory
+	@FileName
 	FileResource getFile();
 	void setFile(FileResource file);
-	
+
 	@Description("Support variables such as ${config.base} or ${env.YOUR_ENV_VAR} in a given yaml file.")
 	@Alias("v")
 	boolean getHasVars();
