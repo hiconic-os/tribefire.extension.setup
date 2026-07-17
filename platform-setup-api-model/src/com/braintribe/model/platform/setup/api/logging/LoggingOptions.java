@@ -35,13 +35,13 @@ public interface LoggingOptions extends GenericEntity {
 	String logFilesCronRotate = "logFilesCronRotate";
 
 	@Mandatory
-	@Initializer("enum(com.braintribe.model.platform.setup.api.logging.LogLevel,INFO)")
+	@Initializer("FINE")
 	@Description("Log level for console output.")
 	LogLevel getConsoleLogLevel();
 	void setConsoleLogLevel(LogLevel consoleLogLevel);
 
 	@Mandatory
-	@Initializer("enum(com.braintribe.model.platform.setup.api.logging.LogLevel,FINE)")
+	@Initializer("FINE")
 	@Description("Log level for file output. This is used for the respective default log files of each container.")
 	LogLevel getLogFilesLogLevel();
 	void setLogFilesLogLevel(LogLevel logFilesLogLevel);
