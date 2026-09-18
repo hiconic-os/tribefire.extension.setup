@@ -40,7 +40,7 @@ limitations under the License.
         <dependency>
             <groupId>com.braintribe.devrock.ant</groupId>
             <artifactId>devrock-ant-tasks</artifactId>
-            <version>${V.com.braintribe.devrock.ant}</version>
+            <version>[1.0.514,1.1)</version>
 	        <exclusions><exclusion/></exclusions>
         </dependency>
         <dependency>
